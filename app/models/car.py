@@ -11,8 +11,8 @@ class Car:
         self.set_license_plate(license_plate)
         self.owner = None
         self.owner_id = None
-        self.id = _cars_counter
-        _cars_counter += 1
+        self.id = str(Car._cars_counter)
+        Car._cars_counter += 1
 
     def set_brand(self, brand):
         try:
@@ -64,3 +64,6 @@ class Car:
             # raise error if license_plate is in the incorrect format
             error_message = "License plate should be a string"
             raise TypeError(error_message)
+
+    def set_owner(self, owner):
+        owner.attach_a_car(self)

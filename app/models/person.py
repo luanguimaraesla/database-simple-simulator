@@ -8,9 +8,9 @@ class Person:
     def __init__(self, name, cpf):
         self.set_name(name)
         self.set_cpf(cpf)
-        self.cars = []
-        self.id = _people_counter
-        _people_counter += 1
+        self.cars = {} # id : car object
+        self.id = str(Person._people_counter)
+        Person._people_counter += 1
         
     def set_name(self, name):
         try:
@@ -29,4 +29,20 @@ class Person:
             self.cpf = cpf
         else:
             error_message = "Invalid format for CPF"
-            raise TypeError(error_message) 
+            raise TypeError(error_message)
+
+    def append_a_car(self, car):
+        if isinstance(car, Car):
+            self.cars[car.id] = car
+        else:
+            error_message = "car must be a Car object"
+            raise TypeError(error_message)
+    
+    def attach_a_car(self, car):
+        if isinstance(car, Car):
+            car.owner = self
+            car.owner_id = self.id
+            self.append_a_car(car)
+        else:
+            error_message = "car must be a Car object"
+            raise TypeError(error_message)
