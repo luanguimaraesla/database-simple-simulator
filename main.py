@@ -4,7 +4,7 @@
 #from app.controllers.cars_controller import *
 from app.controllers.application_controller import *
 
-if __name__ == '__main__':
+def main():
 #    aPerson = Person("luan guimaraes", "05199692194")
 #    aCar = Car("Ford", "thunder bird", "1986", "LIS7654")
 #    aPerson.attach_a_car(aCar)
@@ -12,4 +12,8 @@ if __name__ == '__main__':
 #    save_person(aPerson)
 #    save_car(aCar)
     load_database()
-    print_menus_options()
+    menu()
+
+
+if __name__ == '__main__':
+    main()

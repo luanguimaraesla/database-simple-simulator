@@ -27,19 +27,38 @@ def load_database():
             content = people_data_file.readlines()[1:]
             person_info = None
             ids = []
+            global people
             for person_dump in content:
                 person_info = person_dump.strip().split('|')
+                
                 people += [find_person_by_id(person_info[0])]
 
+            global IS_DATABASE_LOADED
             IS_DATABASE_LOADED = True
     except IOError as io_err:
         # Display error message [TODO]
         print(str(io_err))
    
+def print_people():
+    for person in people:
+        print("===================================================================")
+        print('\n' + person.id + "| Name: " + person.name + " | CPF: " + person.cpf)
+        print("\nCars:\n")
+        for id, car in list(person.cars.items()):
+            print(id + "| Brand: " + car.brand + " | Model: " + car.model +
+                  " | Year: " + car.year + " | License Plate: " +
+                  car.license_plate + "\n")
+        print('\n')
+        print("===================================================================")
+        print('\n')
+
 def list_people():
+    global IS_DATABASE_LOADED
     if not IS_DATABASE_LOADED:
         load_database()
-    return people
+
+    print_people()
+    
 
 def print_menus_options():
     op = int(input("0. Drop DB\n1. Add person\n2. List people\n3. Exit\n Select: "))
@@ -52,7 +71,7 @@ def menu():
             drop_database()
             print("Success\n")
 
-        if selected_option == 1:
+        elif selected_option == 1:
             name = input("Name: ")
             cpf = input("CPF: ")
             cars = []
@@ -71,12 +90,14 @@ def menu():
 
             person = create_person(name, cpf, cars)
             save_person(person)
+            global people
+            people += [person]
 
         elif selected_option == 2:
-            pass
+            list_people()
 
         else:
             save_next_person_id_reference()
             save_next_car_id_reference()
-
+            exit()
 

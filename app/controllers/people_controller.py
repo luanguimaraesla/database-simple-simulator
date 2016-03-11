@@ -52,8 +52,9 @@ def find_person_by_id(person_id):
             person = Person(person_info[1], person_info[2], person_info[0])
             
             cars_ids = person_info[3].strip('[]').split(',')
+
             for car_id in cars_ids:
-                car = find_car_by_id(car_id)
+                car = find_car_by_id(car_id.strip())
                 if car:
                     person.attach_a_car(car)
                 else:
