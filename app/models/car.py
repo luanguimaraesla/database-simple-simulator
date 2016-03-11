@@ -4,15 +4,18 @@ import re
 class Car:
     _cars_counter = 0
 
-    def __init__(self, brand, model, year, license_plate):
+    def __init__(self, brand, model, year, license_plate, id=None):
         self.set_brand(brand)
         self.set_model(model)
         self.set_year(year)
         self.set_license_plate(license_plate)
         self.owner = None
         self.owner_id = None
-        self.id = str(Car._cars_counter)
-        Car._cars_counter += 1
+        if not id:
+            self.id = str(Car._cars_counter)
+            Car._cars_counter += 1
+        else:
+            self.id = id
 
     def set_brand(self, brand):
         try:

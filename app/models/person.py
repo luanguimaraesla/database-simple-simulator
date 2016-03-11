@@ -5,13 +5,16 @@ import re
 class Person:
     _people_counter = 0
 
-    def __init__(self, name, cpf):
+    def __init__(self, name, cpf, id=None):
         self.set_name(name)
         self.set_cpf(cpf)
         self.cars = {} # id : car object
-        self.id = str(Person._people_counter)
-        Person._people_counter += 1
-        
+        if not id:
+            self.id = str(Person._people_counter)
+            Person._people_counter += 1
+        else:
+            self.id = id
+
     def set_name(self, name):
         try:
             self.name = capitalize_all_words(name) 

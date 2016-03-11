@@ -1,6 +1,7 @@
 from app.models.car import Car
 from app.models.person import Person
 from app.controllers.people_controller import *
+from app.controllers.cars_controller import *
 
 if __name__ == '__main__':
     aPerson = Person("luan guimaraes", "05199692194")
@@ -8,3 +9,4 @@ if __name__ == '__main__':
     aPerson.attach_a_car(aCar)
     print("aqui")
     save_person(aPerson)
+    save_car(aCar)
