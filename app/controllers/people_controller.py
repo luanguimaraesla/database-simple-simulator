@@ -1,15 +1,35 @@
 from app.models.person import Person
 from app.controllers.cars_controller import *
 
+def create_person(name, cpf, cars):
+    person = Person(name, cpf)
+    for car in cars:
+        person.attach_a_car(car)
+    return person
+
+def save_next_person_id_reference():
+    try:
+        with open('app/data/people_next_id.data', 'w') as people_data_file:
+            text_to_save = str(Person._people_counter)
+            people_data_file.write(text_to_save)
+    except IOError as io_err:
+        # Display error message [TODO]
+        print(str(io_err))
+
 def save_person(person):
     try:
         with open('app/data/people.data', 'a') as people_data_file:
+            cars_ids = list(person.cars.keys())
             text_to_save = "|".join([person.id,
                                      person.name,
                                      person.cpf,
-                                     str(list(person.cars.keys())).replace("'","")
+                                     str(cars_ids).replace("'","")
                                      ]) + '|\n'
             people_data_file.write(text_to_save)
+            
+            for car_id in cars_ids:
+                save_car(person.cars[car_id])
+
     except IOError as io_err:
         # Display error message [TODO]
         print(str(io_err))

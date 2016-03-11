@@ -1,5 +1,17 @@
 from app.models.car import Car
 
+def save_next_car_id_reference():
+    try:
+        with open('app/data/cars_next_id.data', 'w') as car_data_file:
+            text_to_save = str(Car._cars_counter)
+            car_data_file.write(text_to_save)
+    except IOError as io_err:
+        # Display error message [TODO]
+        print(str(io_err))
+
+def create_car(brand, model, year, license_plate):
+    return Car(brand, model, year, license_plate)
+
 def save_car(car):
     try:
         with open('app/data/cars.data', 'a') as cars_data_file:
