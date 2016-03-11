@@ -2,11 +2,17 @@ from app.helpers.formatting import *
 import re
 
 class Car:
-    def __init__(self, brand, model, year, license_plate, owner=None):
+    _cars_counter = 0
+
+    def __init__(self, brand, model, year, license_plate):
         self.set_brand(brand)
         self.set_model(model)
         self.set_year(year)
         self.set_license_plate(license_plate)
+        self.owner = None
+        self.owner_id = None
+        self.id = _cars_counter
+        _cars_counter += 1
 
     def set_brand(self, brand):
         try:

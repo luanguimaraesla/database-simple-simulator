@@ -1,11 +1,17 @@
 from app.helpers.formatting import *
+from app.models.car import Car
 import re
 
 class Person:
+    _people_counter = 0
+
     def __init__(self, name, cpf):
         self.set_name(name)
         self.set_cpf(cpf)
-
+        self.cars = []
+        self.id = _people_counter
+        _people_counter += 1
+        
     def set_name(self, name):
         try:
             self.name = capitalize_all_words(name) 
@@ -23,7 +29,4 @@ class Person:
             self.cpf = cpf
         else:
             error_message = "Invalid format for CPF"
-            raise TypeError(error_message)
-    
-        
- 
+            raise TypeError(error_message) 
