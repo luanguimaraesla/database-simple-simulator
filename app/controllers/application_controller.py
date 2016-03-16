@@ -61,7 +61,8 @@ def list_people():
     
 
 def print_menus_options():
-    op = int(input("0. Drop DB\n1. Add person\n2. List people\n3. Exit\n Select: "))
+    menu_text = "0. Drop DB\n1. Add person\n2. List people\n3. Exit\n Select: "
+    op = int(input(menu_text))
     return op
 
 def menu():
